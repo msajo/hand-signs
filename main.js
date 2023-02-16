@@ -20,7 +20,7 @@ function take_snapshot(){
 
 console.log("ml5.version",ml5.version);
 
-classifier = ml5.classifyImage("https://teachablemachine.withgoogle.com/models/UVZsgEYNw/model.json",modelLoaded);
+classifier = ml5.imageClassifier("https://teachablemachine.withgoogle.com/models/UVZsgEYNw/model.json",modelLoaded);
 
 function modelLoaded(){
     console.log("Model Loaded !!!");
@@ -41,33 +41,33 @@ function check(){
 
 function got_result(error,results){
     if(error){
-        console.log(error);
+        console.error(error);
     }
     else{
         console.log(results);
-        document.getElementById("emotion_result1").innerHTML = results[0].label;
-        document.getElementById("emotion_result2").innerHTML = results[1].label;
+        document.getElementById("Hand_Result").innerHTML = results[0].label;
+        document.getElementById("Hand_Result1").innerHTML = results[1].label;
         prediction_1 = results[0].label;
         prediction_2 = results[1].label;
         speak();
         if(results[0].label == "peace"){
-            document.getElementById("Hand_Result").innerHTML = "&#9996;";
+            document.getElementById("emoji_result1").innerHTML = "&#9996;";
         }
         if(results[0].label == "hand split"){
-            document.getElementById("Hand_Result").innerHTML = "&#128406;";
-        }
-        if(results[0].label == "crazy"){
-            document.getElementById("Hand_Result").innerHTML = "&#129304;";
-        }
-
-        if(results[0].label == "peace"){
-            document.getElementById("Hand_Result1").innerHTML = "&#9996;";
-        }
-        if(results[0].label == "hand split"){
-            document.getElementById("Hand_Result1").innerHTML = "&#128406;";
+            document.getElementById("emoji_result1").innerHTML = "&#128406;";
         }
         if(results[0].label == "crazy"){
             document.getElementById("emoji_result1").innerHTML = "&#129304;";
+        }
+
+        if(results[1].label == "peace"){
+            document.getElementById("emoji_result2").innerHTML = "&#9996;";
+        }
+        if(results[1].label == "hand split"){
+            document.getElementById("emoji_result2").innerHTML = "&#128406;";
+        }
+        if(results[1].label == "crazy"){
+            document.getElementById("emoji_result2").innerHTML = "&#129304;";
         }  
 
     }
